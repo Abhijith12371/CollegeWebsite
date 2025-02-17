@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Users, Phone, Mail, School, Award, 
-  ChevronRight, X, GraduationCap, Calendar, Star, Music2
+  ChevronRight, X, GraduationCap, Calendar, Star, Music2, MapPin, BookOpen
 } from 'lucide-react';
 
 interface Coordinator {
@@ -13,11 +13,21 @@ interface Coordinator {
   class?: string;
 }
 
+interface EventDetails {
+  name: string;
+  venue?: string; // Optional field
+  rules?: string[]; // Optional field
+  coordinator: {
+    name: string;
+    phone: string;
+  };
+}
+
 interface Department {
   faculty_coordinator: Coordinator | { name: string; phone: string; };
   faculty_coordinators?: Coordinator[];
   student_coordinator: Coordinator;
-  events: string[] | Record<string, string>;
+  events: EventDetails[];
 }
 
 interface ScheduleData {
@@ -40,10 +50,36 @@ const Schedule = () => {
           "name": "Dr B Sri Hari Rao",
           "phone": "9293786399"
         },
-        "events": {
-          "Maths": "Math Magic Show",
-          "English": "Declamation"
-        }
+        "events": [
+          {
+            name: "Math Puzzle Hunt",
+            venue: "Main Hall",
+            rules: [
+              "The first puzzle file has no password and can be accessed directly.",
+              "The solution to each question leads to the password for the next file.",
+              "Solving the puzzle is the only way to continue and unlock the password for the next file.",
+              "The file may contain: (a) The Magic Number Trick, (b) The Birthday Paradox, (c) Mental Multiplication, (d) Basic Calculations, (e) Pattern Recognition, (f) Logic and Reasoning Problems, (g) Algebraic Equations."
+            ],
+            coordinator: {
+              name: "Dr. G. Adilakshmi",
+              phone: "9985398080"
+            }
+          },
+          {
+            name: "Declamation",
+            venue: "Auditorium",
+            rules: [
+              "Individual Participation.",
+              "Participants must deliver a portion of a speech previously delivered by a great personality.",
+              "The goal is to convey a message with clarity, emotion, and persuasiveness.",
+              "Time limit: 3 minutes."
+            ],
+            coordinator: {
+              name: "Mrs. V. Navata",
+              phone: "7893838177"
+            }
+          }
+        ]
       },
       "FED-2": {
         "faculty_coordinator": {
@@ -54,10 +90,34 @@ const Schedule = () => {
           "name": "R Madhu Venkata Sai Ganesh",
           "phone": "9666485544"
         },
-        "events": {
-          "Physics": "Rebus Puzzles in Physics",
-          "Chemistry": "Poster presentation - Role of advanced materials in engineering"
-        }
+        "events": [
+          {
+            name: "Rebus Puzzles in Physics",
+            venue: "Physics Lab",
+            rules: [
+              "Teams of 2 members.",
+              "Solve rebus puzzles related to physics concepts.",
+              "Time limit: 20 minutes."
+            ],
+            coordinator: {
+              name: "Dr. G. Srinivasa Rao",
+              phone: "9866391041"
+            }
+          },
+          {
+            name: "Poster Presentation - Role of Advanced Materials in Engineering",
+            venue: "Chemistry Lab",
+            rules: [
+              "Individual or team of 2.",
+              "Poster size: A1 (594 x 841 mm).",
+              "Present for 5 minutes, followed by Q&A."
+            ],
+            coordinator: {
+              name: "Dr. G. Srinivasa Rao",
+              phone: "9866391041"
+            }
+          }
+        ]
       },
       "CSE": {
         "faculty_coordinators": [
@@ -69,7 +129,125 @@ const Schedule = () => {
           "phone": "8317634794",
           "email": "sravanmandava1126@gmail.com"
         },
-        "events": ["Code Sankalp", "Avishkar Anveshan", "Logo Quiz", "Bug War"]
+        "events": [
+          {
+            name: "LOGO QUIZ",
+            venue: "192 Lab",
+            rules: [
+              "Only 2 persons per team.",
+              "Every team should bring a pen."
+            ],
+            coordinator: {
+              name: "Mr. M.V.P. Uma Maheswara Rao",
+              phone: "7382745151"
+            }
+          },
+          {
+            name: "BUG WAR",
+            venue: "DBMS Lab",
+            rules: [
+              "Phones and smartwatches are not allowed."
+            ],
+            coordinator: {
+              name: "Mrs. CH. N. Santha Kumari",
+              phone: "7207444601"
+            }
+          },
+          {
+            name: "AVISHKAAR ANVESHAN",
+            venue: "1214 Lab",
+            rules: [
+              "Posters related to CSE topics such as AI, ML, Cloud Computing, Data Science, Blockchain, or any emerging technology."
+            ],
+            coordinator: {
+              name: "Dr. G. Shobana",
+              phone: "8985423344"
+            }
+          },
+          {
+            name: "CODE SANKALP",
+            venue: "WT Lab",
+            rules: [
+              "Only 2 persons per team.",
+              "Phones and smartwatches are not allowed."
+            ],
+            coordinator: {
+              name: "Mr. A. Tarak Ram",
+              phone: "8106356348"
+            }
+          }
+        ]
+      },
+      "IT": {
+        "faculty_coordinator": {
+          "name": "Smt.G.Baleswari",
+          "phone": "8500275537"
+        },
+        "student_coordinator": {
+          "name": "T.Revanth",
+          "phone": "8886168440"
+        },
+        "events": [
+          {
+            name: "INNOVISTAS",
+            venue: "Room 3205",
+            rules: [
+              "Only 2 persons per team.",
+              "Presentation time: 8 minutes + 2 minutes for queries.",
+              "Candidates must submit one hard copy at the time of presentation.",
+              "All students must ensure a fair and professional environment."
+            ],
+            coordinator: {
+              name: "Mrs. K. Vijitha",
+              phone: "7997605390"
+            }
+          },
+          {
+            name: "Creative Exhibit",
+            venue: "Room 3204",
+            rules: [
+              "Maximum of 3 participants per project/model.",
+              "A team member can participate in only one project.",
+              "Projects must be in working condition.",
+              "Participants must bring their own accessories.",
+              "Submit a hard copy of the abstract during the presentation."
+            ],
+            coordinator: {
+              name: "Mr. N. Narasimha Rao",
+              phone: "8184972436"
+            }
+          },
+          {
+            name: "Bytes and Bits Quiz",
+            venue: "Room 3304",
+            rules: [
+              "Team comprises of 2 members.",
+              "Each team would be given a set of 25 objective-type questions.",
+              "Time limit: 15 minutes.",
+              "Only 5 teams would be selected for the FINAL ROUND.",
+              "In case of a tie, 3 additional questions would be asked."
+            ],
+            coordinator: {
+              name: "Mr. P. Kiran Babu",
+              phone: "9989643958"
+            }
+          },
+          {
+            name: "Next Gen Ideas",
+            venue: "Room 3303",
+            rules: [
+              "The poster size should be 20 x 30 inches.",
+              "Maximum of 2 persons per presentation.",
+              "Participants must bring their own materials.",
+              "Judges/reviewers and audience may pose questions.",
+              "Ensure a fair and professional environment."
+            ],
+            coordinator: {
+              name: "Ms. M. Tejaswini",
+              phone: "8179883362"
+            }
+          }
+        ]
       },
       "CSE-DS": {
         "faculty_coordinator": {
@@ -81,10 +259,31 @@ const Schedule = () => {
           "phone": "8328109217"
         },
         "events": [
-          "Technical Quiz",
-          "Blind Coding",
-          "Gen AI Models Expo",
-          "Idea To Prototype Challenge"
+          {
+            name: "Technical Quiz",
+            venue: "Data Science Lab",
+            rules: [
+              "Teams of 2 members.",
+              "20 multiple-choice questions.",
+              "Time limit: 15 minutes."
+            ],
+            coordinator: {
+              name: "Mr. B. Phanindra Kumar",
+              phone: "9014260174"
+            }
+          },
+          {
+            name: "Blind Coding",
+            venue: "Programming Lab",
+            rules: [
+              "Participants must write code without seeing the screen.",
+              "Time limit: 10 minutes."
+            ],
+            coordinator: {
+              name: "Mr. B. Phanindra Kumar",
+              phone: "9014260174"
+            }
+          }
         ]
       },
       "CSE-AIML": {
@@ -96,7 +295,33 @@ const Schedule = () => {
           "name": "Mr. N.Bhogeeswar",
           "phone": "8309298044"
         },
-        "events": ["Paper Presentation", "Poster Presentation", "Project Expo", "Code Hackathon"]
+        "events": [
+          {
+            name: "Paper Presentation",
+            venue: "AIML Lab",
+            rules: [
+              "Individual or team of 2.",
+              "Presentation time: 10 minutes.",
+              "Topics related to AI/ML."
+            ],
+            coordinator: {
+              name: "Mr.Rajenra",
+              phone: "9494367464"
+            }
+          },
+          {
+            name: "Poster Presentation",
+            venue: "AIML Lab",
+            rules: [
+              "Poster size: A1 (594 x 841 mm).",
+              "Present for 5 minutes, followed by Q&A."
+            ],
+            coordinator: {
+              name: "Mr.Rajenra",
+              phone: "9494367464"
+            }
+          }
+        ]
       },
       "AIML": {
         "faculty_coordinator": {
@@ -107,7 +332,34 @@ const Schedule = () => {
           "name": "K. Sai Harsha",
           "phone": "9985584854"
         },
-        "events": ["Code & Quest", "Ideathon", "Prompt Perfect", "PPT Challenge"]
+        "events": [
+          {
+            name: "Code & Quest",
+            venue: "AIML Lab",
+            rules: [
+              "Teams of 2 members.",
+              "Solve coding challenges related to AI/ML.",
+              "Time limit: 30 minutes."
+            ],
+            coordinator: {
+              name: "Dr. Y. Arpitha",
+              phone: "9493468888"
+            }
+          },
+          {
+            name: "Ideathon",
+            venue: "AIML Lab",
+            rules: [
+              "Individual or team of 2.",
+              "Present innovative ideas related to AI/ML.",
+              "Time limit: 10 minutes."
+            ],
+            coordinator: {
+              name: "Dr. Y. Arpitha",
+              phone: "9493468888"
+            }
+          }
+        ]
       },
       "ECE": {
         "faculty_coordinator": {
@@ -120,7 +372,34 @@ const Schedule = () => {
           "phone": "9515739145",
           "email": "maanasr116@gmail.com"
         },
-        "events": ["Technical Quiz", "Technical Paper Presentations", "Poster Presentations", "Project Expo"]
+        "events": [
+          {
+            name: "Technical Quiz",
+            venue: "ECE Lab",
+            rules: [
+              "Teams of 2 members.",
+              "20 multiple-choice questions.",
+              "Time limit: 15 minutes."
+            ],
+            coordinator: {
+              name: "Gottipati Srinivas Babu",
+              phone: "9492273639"
+            }
+          },
+          {
+            name: "Technical Paper Presentations",
+            venue: "ECE Seminar Hall",
+            rules: [
+              "Individual or team of 2.",
+              "Presentation time: 10 minutes.",
+              "Topics related to ECE."
+            ],
+            coordinator: {
+              name: "Gottipati Srinivas Babu",
+              phone: "9492273639"
+            }
+          }
+        ]
       },
       "EEE": {
         "faculty_coordinator": {
@@ -131,7 +410,33 @@ const Schedule = () => {
           "name": "MATTA BALA VENKATA SAI",
           "phone": "7207219186"
         },
-        "events": ["Poster Presentation", "Paper Presentation", "Technical Quiz", "Electrical Project Expo"]
+        "events": [
+          {
+            name: "Poster Presentation",
+            venue: "EEE Lab",
+            rules: [
+              "Poster size: A1 (594 x 841 mm).",
+              "Present for 5 minutes, followed by Q&A."
+            ],
+            coordinator: {
+              name: "Mr.R.Raghu Nadha Sastry",
+              phone: "9490337572"
+            }
+          },
+          {
+            name: "Paper Presentation",
+            venue: "EEE Seminar Hall",
+            rules: [
+              "Individual or team of 2.",
+              "Presentation time: 10 minutes.",
+              "Topics related to EEE."
+            ],
+            coordinator: {
+              name: "Mr.R.Raghu Nadha Sastry",
+              phone: "9490337572"
+            }
+          }
+        ]
       },
       "Mechanical": {
         "faculty_coordinator": {
@@ -144,7 +449,34 @@ const Schedule = () => {
           "phone": "8247329390",
           "email": "bharathnaraga@gmail.com"
         },
-        "events": ["Technical Paper Presentation", "Project Expo", "Thrust Rocket", "CAD Builder"]
+        "events": [
+          {
+            name: "Technical Paper Presentation",
+            venue: "Mechanical Seminar Hall",
+            rules: [
+              "Individual or team of 2.",
+              "Presentation time: 10 minutes.",
+              "Topics related to Mechanical Engineering."
+            ],
+            coordinator: {
+              name: "Mrs. CH. Srilatha",
+              phone: "8985140500"
+            }
+          },
+          {
+            name: "Project Expo",
+            venue: "Mechanical Lab",
+            rules: [
+              "Teams of 2-3 members.",
+              "Projects must be in working condition.",
+              "Present for 10 minutes, followed by Q&A."
+            ],
+            coordinator: {
+              name: "Mrs. CH. Srilatha",
+              phone: "8985140500"
+            }
+          }
+        ]
       },
       "Civil": {
         "faculty_coordinator": {
@@ -155,22 +487,32 @@ const Schedule = () => {
           "name": "Santi Swaroop",
           "phone": "9573496479"
         },
-        "events": ["Poster Presentation", "Paper Presentation", "Technical Quiz", "CAD Crusade"]
-      },
-      "IT": {
-        "faculty_coordinator": {
-          "name": "Smt.G.Baleswari",
-          "phone": "8500275537"
-        },
-        "student_coordinator": {
-          "name": "T.Revanth",
-          "phone": "8886168440"
-        },
         "events": [
-          "INNOVISTAS",
-          "Creative Exhibit",
-          "Bytes And Bits Quiz",
-          "Next Gen Ideas"
+          {
+            name: "Poster Presentation",
+            venue: "Civil Lab",
+            rules: [
+              "Poster size: A1 (594 x 841 mm).",
+              "Present for 5 minutes, followed by Q&A."
+            ],
+            coordinator: {
+              name: "A Sai Chandu",
+              phone: "9346799566"
+            }
+          },
+          {
+            name: "Paper Presentation",
+            venue: "Civil Seminar Hall",
+            rules: [
+              "Individual or team of 2.",
+              "Presentation time: 10 minutes.",
+              "Topics related to Civil Engineering."
+            ],
+            coordinator: {
+              name: "A Sai Chandu",
+              phone: "9346799566"
+            }
+          }
         ]
       },
       "MBA": {
@@ -182,41 +524,76 @@ const Schedule = () => {
           "name": "D. Aravind",
           "phone": "9010655815"
         },
-        "events": ["Young Manager", "Market Makers", "Bizz Quiz"]
+        "events": [
+          {
+            name: "Young Manager",
+            venue: "MBA Seminar Hall",
+            rules: [
+              "Individual participation.",
+              "Case study analysis and presentation.",
+              "Time limit: 15 minutes."
+            ],
+            coordinator: {
+              name: "Dr.K.Chinni Krishna",
+              phone: "9393363615"
+            }
+          },
+          {
+            name: "Market Makers",
+            venue: "MBA Lab",
+            rules: [
+              "Teams of 2 members.",
+              "Create a marketing strategy for a given product.",
+              "Time limit: 20 minutes."
+            ],
+            coordinator: {
+              name: "Dr.K.Chinni Krishna",
+              phone: "9393363615"
+            }
+          }
+        ]
       }
     }
   };
 
-  const renderEvents = (events: string[] | Record<string, string>) => {
-    if (Array.isArray(events)) {
-      return events.map((event, index) => (
-        <motion.li
-          key={index}
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: index * 0.1 }}
-          className="flex items-center space-x-2 text-emerald-300"
-        >
-          <Award className="w-4 h-4" />
-          <span>{event}</span>
-        </motion.li>
-      ));
-    } else {
-      return Object.entries(events).map(([subject, event], index) => (
-        <motion.li
-          key={index}
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: index * 0.1 }}
-          className="flex items-center space-x-2 text-emerald-300"
-        >
-          <Award className="w-4 h-4" />
-          <span>
-            <strong className="text-teal-400">{subject}:</strong> {event}
-          </span>
-        </motion.li>
-      ));
-    }
+  const renderEvents = (events: EventDetails[]) => {
+    return events.map((event, index) => (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: index * 0.1 }}
+        className="mb-6"
+      >
+        <h4 className="text-xl font-semibold mb-2 flex items-center bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
+          <Award className="w-5 h-5 mr-2 text-purple-400" />
+          {event.name}
+        </h4>
+        {event.venue && (
+          <div className="flex items-center text-sm text-gray-400 mb-2">
+            <MapPin className="w-4 h-4 mr-2" />
+            <span>Venue: {event.venue}</span>
+          </div>
+        )}
+        <div className="flex items-center text-sm text-gray-400 mb-2">
+          <Users className="w-4 h-4 mr-2" />
+          <span>Coordinator: {event.coordinator.name} ({event.coordinator.phone})</span>
+        </div>
+        {event.rules && (
+          <div className="text-sm text-gray-400">
+            <h5 className="font-semibold mb-1 flex items-center">
+              <BookOpen className="w-4 h-4 mr-2" />
+              Rules:
+            </h5>
+            <ul className="list-disc list-inside">
+              {event.rules.map((rule, i) => (
+                <li key={i} className="mb-1">{rule}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </motion.div>
+    ));
   };
 
   return (
@@ -302,7 +679,7 @@ const Schedule = () => {
                     <ChevronRight className="w-5 h-5 text-purple-400" />
                   </div>
                   <p className="text-gray-400 mb-2">
-                    {Array.isArray(deptData.events) ? deptData.events.length : Object.keys(deptData.events).length} Events
+                    {deptData.events.length} Events
                   </p>
                   <div className="flex items-center text-sm text-gray-500">
                     <Users className="w-4 h-4 mr-2" />
@@ -327,7 +704,7 @@ const Schedule = () => {
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm p-8 max-w-2xl w-full"
+                className="relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
                 onClick={e => e.stopPropagation()}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 opacity-50" />
@@ -417,9 +794,9 @@ const Schedule = () => {
                         <Calendar className="w-5 h-5 mr-2 text-purple-400" />
                         Events
                       </h4>
-                      <ul className="space-y-2">
+                      <div className="space-y-4">
                         {renderEvents(scheduleData.departments[selectedDept].events)}
-                      </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
